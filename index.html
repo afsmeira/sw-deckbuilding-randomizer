@@ -34,6 +34,8 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Star field */
@@ -95,8 +97,10 @@
 
     main {
       max-width: 680px;
+      width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 6rem;
+      padding: 2.5rem 1.5rem 4rem;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2rem;
@@ -157,14 +161,14 @@
     .product-label input[type="checkbox"]:checked::after {
       content: '';
       position: absolute;
-      left: 3px;
-      top: 0px;
-      width: 6px;
-      height: 10px;
+      left: 50%;
+      top: 50%;
+      width: 5px;
+      height: 9px;
       border: 2px solid #05060f;
       border-top: none;
       border-left: none;
-      transform: rotate(45deg);
+      transform: translate(-50%, -60%) rotate(45deg);
     }
 
     .product-info strong {
@@ -423,17 +427,13 @@
       color: #dde4f0;
     }
     footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 2;
+      position: relative;
+      z-index: 1;
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 1rem;
+      padding: 1rem;
+      font-size: 0.75rem;
       letter-spacing: 0.04em;
       color: #445566;
-      background: #05060f;
       border-top: 1px solid #1e2a40;
     }
   </style>
@@ -496,8 +496,7 @@
   </section>
 
   <div class="error-msg" id="error-msg">
-    At least one standalone product (Base Game or Clone Wars Edition) must be selected.
-    The Mandalorian Faction Pack is an expansion and cannot be used alone.
+    At least one standalone product (Base Game or Clone Wars Edition) must be selected. The Mandalorian Faction Pack is an expansion and cannot be used alone.
   </div>
 
   <button class="randomize-btn" id="randomize-btn">Randomize</button>
