@@ -184,7 +184,7 @@
       letter-spacing: 0.02em;
     }
 
-    .product-label a.rulebook-link {
+    a.rulebook-link {
       display: inline-block;
       align-self: center;
       flex-shrink: 0;
@@ -197,22 +197,12 @@
       transition: color 0.15s, border-color 0.15s;
     }
 
-    .product-label a.rulebook-link:hover {
+    a.rulebook-link:hover {
       color: #f0d060;
       border-color: #f0d060;
     }
 
     /* Game mode */
-    .game-mode-section {
-      display: block;
-    }
-
-    .game-mode-section.disabled .mode-label {
-      opacity: 0.35;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
     .game-mode-section {
       display: flex;
       align-items: center;
@@ -249,6 +239,12 @@
       background: #0f1528;
     }
 
+    .mode-label.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     .mode-label input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
@@ -279,23 +275,6 @@
       font-size: 1rem;
       letter-spacing: 0.04em;
       color: #dde4f0;
-    }
-
-    /* 3-player grid */
-    .player-cards.three-players {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    @media (max-width: 560px) {
-      .player-cards.three-players { grid-template-columns: 1fr; }
-    }
-
-    #card-p3 {
-      display: none;
-    }
-
-    .player-cards.three-players #card-p3 {
-      display: block;
     }
 
     /* Error */
@@ -367,6 +346,7 @@
       margin-bottom: 0.25rem;
     }
 
+    /* Standard layout (1v1 / 3p) */
     .player-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -377,6 +357,70 @@
       .player-cards { grid-template-columns: 1fr; }
     }
 
+    .player-cards.three-players {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 560px) {
+      .player-cards.three-players { grid-template-columns: 1fr; }
+    }
+
+    #card-p3 {
+      display: none;
+    }
+
+    .player-cards.three-players #card-p3 {
+      display: block;
+    }
+
+    /* 2v2 layout */
+    #two-v-two-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .region-headers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .region-header-label {
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8899bb;
+    }
+
+    .two-v-two-team-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .region-headers,
+      .two-v-two-team-row,
+      .two-v-two-galaxy-row { grid-template-columns: 1fr; }
+    }
+
+    .vs-separator {
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #445566;
+    }
+
+    .two-v-two-galaxy-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Player card */
     .player-card {
       border-radius: 8px;
       padding: 1.2rem 1rem;
@@ -426,6 +470,7 @@
       letter-spacing: 0.05em;
       color: #dde4f0;
     }
+
     footer {
       position: relative;
       z-index: 1;
@@ -484,11 +529,16 @@
   <section class="game-mode-section" id="game-mode-section">
     <h2>Game Mode</h2>
     <div class="game-mode-options">
-      <label class="mode-label">
+      <label class="mode-label" id="mode-label-1v1">
         <input type="radio" name="game-mode" value="1v1" checked />
         <span>1v1</span>
       </label>
-      <label class="mode-label">
+      <label class="mode-label" id="mode-label-2v2">
+        <input type="radio" name="game-mode" value="2v2" />
+        <span>2v2</span>
+        <a class="rulebook-link" style="margin-left: 0.5rem; font-size: 0.7rem;" href="https://images-cdn.fantasyflightgames.com/filer_public/2a/00/2a00b9ac-8506-4e0d-bd2c-0b13ce0b35de/swg02_multiplayer_v1-1_compressed.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+      </label>
+      <label class="mode-label" id="mode-label-3p">
         <input type="radio" name="game-mode" value="3p" />
         <span>3-Player Free-for-All</span>
       </label>
@@ -504,25 +554,72 @@
   <section class="results-section" id="results-section">
     <h2>Results</h2>
 
-    <div class="player-cards">
-      <div class="player-card" id="card-p1">
-        <div class="player-label">Player 1</div>
-        <div class="faction-name" id="p1-faction"></div>
+    <!-- Standard layout: 1v1 and 3p -->
+    <div id="standard-layout">
+      <div class="player-cards">
+        <div class="player-card" id="card-p1">
+          <div class="player-label">Player 1</div>
+          <div class="faction-name" id="p1-faction"></div>
+        </div>
+        <div class="player-card" id="card-p2">
+          <div class="player-label">Player 2</div>
+          <div class="faction-name" id="p2-faction"></div>
+        </div>
+        <div class="player-card" id="card-p3">
+          <div class="player-label">Player 3</div>
+          <div class="faction-name" id="p3-faction"></div>
+        </div>
       </div>
-      <div class="player-card" id="card-p2">
-        <div class="player-label">Player 2</div>
-        <div class="faction-name" id="p2-faction"></div>
-      </div>
-      <div class="player-card" id="card-p3">
-        <div class="player-label">Player 3</div>
-        <div class="faction-name" id="p3-faction"></div>
+
+      <div class="galaxy-card" style="margin-top: 1rem;">
+        <div class="galaxy-label">Galaxy Deck</div>
+        <div class="galaxy-name" id="galaxy-deck"></div>
       </div>
     </div>
 
-    <div class="galaxy-card">
-      <div class="galaxy-label">Galaxy Deck</div>
-      <div class="galaxy-name" id="galaxy-deck"></div>
+    <!-- 2v2 layout -->
+    <div id="two-v-two-layout" style="display:none;">
+      <div class="region-headers">
+        <div class="region-header-label">Region 1</div>
+        <div class="region-header-label">Region 2</div>
+      </div>
+
+      <div class="two-v-two-team-row">
+        <div class="player-card" id="card-2v2-a1">
+          <div class="player-label">Team A</div>
+          <div class="faction-name" id="faction-2v2-a1"></div>
+        </div>
+        <div class="player-card" id="card-2v2-a2">
+          <div class="player-label">Team A</div>
+          <div class="faction-name" id="faction-2v2-a2"></div>
+        </div>
+      </div>
+
+      <div class="vs-separator">vs</div>
+
+      <div class="two-v-two-team-row">
+        <div class="player-card" id="card-2v2-b1">
+          <div class="player-label">Team B</div>
+          <div class="faction-name" id="faction-2v2-b1"></div>
+        </div>
+        <div class="player-card" id="card-2v2-b2">
+          <div class="player-label">Team B</div>
+          <div class="faction-name" id="faction-2v2-b2"></div>
+        </div>
+      </div>
+
+      <div class="two-v-two-galaxy-row">
+        <div class="galaxy-card">
+          <div class="galaxy-label">Galaxy Deck</div>
+          <div class="galaxy-name" id="galaxy-deck-r1"></div>
+        </div>
+        <div class="galaxy-card">
+          <div class="galaxy-label">Galaxy Deck</div>
+          <div class="galaxy-name" id="galaxy-deck-r2"></div>
+        </div>
+      </div>
     </div>
+
   </section>
 
 </main>
@@ -564,29 +661,51 @@
     mandalorian: document.getElementById('cb-mandalorian'),
   };
 
-  const errorMsg        = document.getElementById('error-msg');
-  const resultsSection  = document.getElementById('results-section');
-  const p1FactionEl     = document.getElementById('p1-faction');
-  const p2FactionEl     = document.getElementById('p2-faction');
-  const p3FactionEl     = document.getElementById('p3-faction');
-  const galaxyDeckEl    = document.getElementById('galaxy-deck');
-  const cardP1          = document.getElementById('card-p1');
-  const cardP2          = document.getElementById('card-p2');
-  const cardP3          = document.getElementById('card-p3');
-  const playerCardsEl   = document.querySelector('.player-cards');
-  const gameModeSec     = document.getElementById('game-mode-section');
+  const errorMsg          = document.getElementById('error-msg');
+  const resultsSection    = document.getElementById('results-section');
+  const standardLayout    = document.getElementById('standard-layout');
+  const twoVTwoLayout     = document.getElementById('two-v-two-layout');
+  const playerCardsEl     = document.querySelector('.player-cards');
+  const cardP3            = document.getElementById('card-p3');
 
-  function updateGameMode() {
-    if (checkboxes.mandalorian.checked) {
-      gameModeSec.classList.remove('disabled');
+  const modeLabel1v1      = document.getElementById('mode-label-1v1');
+  const modeLabel2v2      = document.getElementById('mode-label-2v2');
+  const modeLabel3p       = document.getElementById('mode-label-3p');
+
+  function getChecked() {
+    return Object.fromEntries(
+      Object.entries(checkboxes).map(([k, el]) => [k, el.checked])
+    );
+  }
+
+  function updateGameModeOptions() {
+    const checked = getChecked();
+    const can3p  = checked.mandalorian;
+    const can2v2 = checked.base && checked.cloneWars;
+
+    // Enable/disable 3p
+    if (can3p) {
+      modeLabel3p.classList.remove('disabled');
     } else {
-      gameModeSec.classList.add('disabled');
-      document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
+      modeLabel3p.classList.add('disabled');
+      if (document.querySelector('input[name="game-mode"]:checked').value === '3p') {
+        document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
+      }
+    }
+
+    // Enable/disable 2v2
+    if (can2v2) {
+      modeLabel2v2.classList.remove('disabled');
+    } else {
+      modeLabel2v2.classList.add('disabled');
+      if (document.querySelector('input[name="game-mode"]:checked').value === '2v2') {
+        document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
+      }
     }
   }
 
-  checkboxes.mandalorian.addEventListener('change', updateGameMode);
-  updateGameMode();
+  Object.values(checkboxes).forEach(cb => cb.addEventListener('change', updateGameModeOptions));
+  updateGameModeOptions();
 
   function shuffle(arr) {
     const a = arr.slice();
@@ -597,11 +716,13 @@
     return a;
   }
 
+  function setCard(cardEl, factionNameEl, faction) {
+    cardEl.className = 'player-card ' + faction.cssClass;
+    factionNameEl.textContent = faction.name;
+  }
+
   function randomize() {
-    // Read checked products
-    const checked = Object.fromEntries(
-      Object.entries(checkboxes).map(([k, el]) => [k, el.checked])
-    );
+    const checked = getChecked();
 
     // Validate: need at least one standalone product
     const hasStandalone = Object.entries(PRODUCTS).some(
@@ -615,47 +736,71 @@
     }
     errorMsg.classList.remove('visible');
 
-    const is3p = checked.mandalorian &&
-      document.querySelector('input[name="game-mode"]:checked').value === '3p';
+    const mode = document.querySelector('input[name="game-mode"]:checked').value;
 
-    // Build faction pool
+    // Build faction pool from checked products
     const factionPool = Object.entries(PRODUCTS)
       .filter(([key]) => checked[key])
       .flatMap(([, p]) => p.factions);
 
-    // Pick factions
-    const shuffled = shuffle(factionPool);
-    const [f1, f2, f3] = shuffled;
+    const shuffledFactions = shuffle(factionPool);
 
-    // Pick one 1v1 galaxy deck at random from checked products
-    const galaxyPool = Object.entries(PRODUCTS)
-      .filter(([key, p]) => checked[key] && p.galaxyDeck)
-      .map(([, p]) => p.galaxyDeck);
+    if (mode === '2v2') {
+      // Pick 4 factions
+      const [a1, a2, b1, b2] = shuffledFactions;
 
-    let galaxyText = galaxyPool[Math.floor(Math.random() * galaxyPool.length)];
-    if (is3p) galaxyText += ' + ' + PRODUCTS.mandalorian.galaxyDeck3p;
+      // Assign galaxy decks: shuffle [base, cloneWars] and assign one per region
+      const galaxyDecks = shuffle([
+        PRODUCTS.base.galaxyDeck,
+        PRODUCTS.cloneWars.galaxyDeck,
+      ]);
 
-    // Update player cards
-    p1FactionEl.textContent = f1.name;
-    cardP1.className = 'player-card ' + f1.cssClass;
+      setCard(document.getElementById('card-2v2-a1'), document.getElementById('faction-2v2-a1'), a1);
+      setCard(document.getElementById('card-2v2-a2'), document.getElementById('faction-2v2-a2'), a2);
+      setCard(document.getElementById('card-2v2-b1'), document.getElementById('faction-2v2-b1'), b1);
+      setCard(document.getElementById('card-2v2-b2'), document.getElementById('faction-2v2-b2'), b2);
 
-    p2FactionEl.textContent = f2.name;
-    cardP2.className = 'player-card ' + f2.cssClass;
+      document.getElementById('galaxy-deck-r1').textContent = galaxyDecks[0];
+      document.getElementById('galaxy-deck-r2').textContent = galaxyDecks[1];
 
-    if (is3p) {
-      p3FactionEl.textContent = f3.name;
-      cardP3.className = 'player-card ' + f3.cssClass;
-      playerCardsEl.classList.add('three-players');
+      standardLayout.style.display = 'none';
+      twoVTwoLayout.style.display  = 'flex';
+
     } else {
-      playerCardsEl.classList.remove('three-players');
-    }
+      const is3p = mode === '3p';
+      const [f1, f2, f3] = shuffledFactions;
 
-    galaxyDeckEl.textContent = galaxyText;
+      // Pick one galaxy deck from checked standalone products
+      const galaxyPool = Object.entries(PRODUCTS)
+        .filter(([key, p]) => checked[key] && p.galaxyDeck)
+        .map(([, p]) => p.galaxyDeck);
+
+      let galaxyText = galaxyPool[Math.floor(Math.random() * galaxyPool.length)];
+      if (is3p) galaxyText += ' + ' + PRODUCTS.mandalorian.galaxyDeck3p;
+
+      document.getElementById('p1-faction').textContent = f1.name;
+      document.getElementById('card-p1').className = 'player-card ' + f1.cssClass;
+
+      document.getElementById('p2-faction').textContent = f2.name;
+      document.getElementById('card-p2').className = 'player-card ' + f2.cssClass;
+
+      if (is3p) {
+        document.getElementById('p3-faction').textContent = f3.name;
+        document.getElementById('card-p3').className = 'player-card ' + f3.cssClass;
+        playerCardsEl.classList.add('three-players');
+      } else {
+        playerCardsEl.classList.remove('three-players');
+      }
+
+      document.getElementById('galaxy-deck').textContent = galaxyText;
+
+      standardLayout.style.display = 'block';
+      twoVTwoLayout.style.display  = 'none';
+    }
 
     // Reveal results with transition
     resultsSection.classList.remove('revealed');
     resultsSection.classList.add('visible');
-    // Force reflow so transition fires
     void resultsSection.offsetWidth;
     resultsSection.classList.add('revealed');
   }
