@@ -235,6 +235,18 @@
       gap: 1rem;
     }
 
+    @media (max-width: 520px) {
+      .game-mode-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .game-mode-options {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
     .mode-label {
       display: flex;
       align-items: center;
@@ -388,15 +400,19 @@
 
     /* 2v2 layout */
     #two-v-two-layout {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .region-headers {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      #two-v-two-layout { grid-template-columns: 1fr; }
+    }
+
+    .two-v-two-region {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
     .region-header-label {
@@ -407,30 +423,12 @@
       color: #8899bb;
     }
 
-    .two-v-two-team-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    @media (max-width: 480px) {
-      .region-headers,
-      .two-v-two-team-row,
-      .two-v-two-galaxy-row { grid-template-columns: 1fr; }
-    }
-
     .vs-separator {
       text-align: center;
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #445566;
-    }
-
-    .two-v-two-galaxy-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
     }
 
     /* Player card */
@@ -592,39 +590,33 @@
 
     <!-- 2v2 layout -->
     <div id="two-v-two-layout" style="display:none;">
-      <div class="region-headers">
+      <div class="two-v-two-region">
         <div class="region-header-label">Region 1</div>
-        <div class="region-header-label">Region 2</div>
-      </div>
-
-      <div class="two-v-two-team-row">
         <div class="player-card" id="card-2v2-a1">
           <div class="player-label">Team A</div>
           <div class="faction-name" id="faction-2v2-a1"></div>
         </div>
-        <div class="player-card" id="card-2v2-a2">
-          <div class="player-label">Team A</div>
-          <div class="faction-name" id="faction-2v2-a2"></div>
-        </div>
-      </div>
-
-      <div class="vs-separator">vs</div>
-
-      <div class="two-v-two-team-row">
+        <div class="vs-separator">vs</div>
         <div class="player-card" id="card-2v2-b1">
           <div class="player-label">Team B</div>
           <div class="faction-name" id="faction-2v2-b1"></div>
         </div>
-        <div class="player-card" id="card-2v2-b2">
-          <div class="player-label">Team B</div>
-          <div class="faction-name" id="faction-2v2-b2"></div>
-        </div>
-      </div>
-
-      <div class="two-v-two-galaxy-row">
         <div class="galaxy-card">
           <div class="galaxy-label">Galaxy Deck</div>
           <div class="galaxy-name" id="galaxy-deck-r1"></div>
+        </div>
+      </div>
+
+      <div class="two-v-two-region">
+        <div class="region-header-label">Region 2</div>
+        <div class="player-card" id="card-2v2-a2">
+          <div class="player-label">Team A</div>
+          <div class="faction-name" id="faction-2v2-a2"></div>
+        </div>
+        <div class="vs-separator">vs</div>
+        <div class="player-card" id="card-2v2-b2">
+          <div class="player-label">Team B</div>
+          <div class="faction-name" id="faction-2v2-b2"></div>
         </div>
         <div class="galaxy-card">
           <div class="galaxy-label">Galaxy Deck</div>
@@ -777,7 +769,7 @@
       document.getElementById('galaxy-deck-r2').textContent = galaxyDecks[1];
 
       standardLayout.style.display = 'none';
-      twoVTwoLayout.style.display  = 'flex';
+      twoVTwoLayout.style.display  = 'grid';
 
     } else {
       const is3p = mode === '3p';
