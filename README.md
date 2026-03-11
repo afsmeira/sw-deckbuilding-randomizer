@@ -4,4 +4,4 @@
 
 A faction & galaxy deck randomizer tool for [Star Wars: The Deckbuilding Game](https://www.fantasyflightgames.com/en/products/star-wars-the-deckbuilding-game/).
 
-Try it! – https://afsmeira.github.io/sw-deckbuilding-randomizer/
+## 👉 &nbsp; [Try it!](https://afsmeira.github.io/sw-deckbuilding-randomizer/) &nbsp; 👈
