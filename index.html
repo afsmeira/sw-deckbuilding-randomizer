@@ -1,158 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="EFiKdG2PJ-LtWuHBd38gL-unAQukCqIwHCLhYxRJVZc" />
-  <title>SW Deckbuilding Game Randomizer</title>
-  <link rel="canonical" href="https://afsmeira.github.io/sw-deckbuilding-randomizer/">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet" />
-  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAACFkpQAJv8AAAAAAAAUGxwAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMCAgICAgICAgICAgIDAwMDAwICAgICAgICAgIDAwMCAwMDAAACAgICAAADAwMCAgIDAwACAgICAgIAAwMCAgICAAAAAQICAgIEAAAAAgICAgACAQEBAgIEBAQCAAICAgICAgIBAQEEBAQCAgICAgICAgICAgEEBAQCAgICAgICAgICAgIEBAQBAgICAgICAgICAgIEBAQBAQECAgICAgICAgIEBAQCAgEBAQICAgICAgIEBAQCAgICAQEBAgICAgIEBAQCAgICAgIBAQECAgIEBAQCAgICAgICAgEBAQIEBAQCAgICAgICAgICAQEBBAQCAgICAgICAgICAgIBAT/8AAAf+AAAg8EAAMfjAADDwwAA0YsAAPgfAAD8PwAA/D8AAPgfAADxjwAA48cAAMfjAACP8QAAH/gAAD/8AAA=" rel="icon" type="image/x-icon">
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="EFiKdG2PJ-LtWuHBd38gL-unAQukCqIwHCLhYxRJVZc" />
+    <title>SW Deckbuilding Game Randomizer</title>
+    <link rel="canonical" href="https://afsmeira.github.io/sw-deckbuilding-randomizer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet" />
+    <link
+        href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAACFkpQAJv8AAAAAAAAUGxwAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMCAgICAgICAgICAgIDAwMDAwICAgICAgICAgIDAwMCAwMDAAACAgICAAADAwMCAgIDAwACAgICAgIAAwMCAgICAAAAAQICAgIEAAAAAgICAgACAQEBAgIEBAQCAAICAgICAgIBAQEEBAQCAgICAgICAgICAgEEBAQCAgICAgICAgICAgIEBAQBAgICAgICAgICAgIEBAQBAQECAgICAgICAgIEBAQCAgEBAQICAgICAgIEBAQCAgICAQEBAgICAgIEBAQCAgICAgIBAQECAgIEBAQCAgICAgICAgEBAQIEBAQCAgICAgICAgICAQEBBAQCAgICAgICAgICAgIBAT/8AAAf+AAAg8EAAMfjAADDwwAA0YsAAPgfAAD8PwAA/D8AAPgfAADxjwAA48cAAMfjAACP8QAAH/gAAD/8AAA="
+        rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-<header>
-  <h1>SW Deckbuilding Game Randomizer</h1>
-  <p>A faction &amp; galaxy deck randomizer tool for <a href="https://www.fantasyflightgames.com/en/products/star-wars-the-deckbuilding-game/" target="_blank" rel="noopener">Star Wars: The Deckbuilding Game ↗</a></p>
-</header>
+    <header>
+        <h1>SW Deckbuilding Game Randomizer</h1>
+        <p>A faction &amp; galaxy deck randomizer tool for <a
+                href="https://www.fantasyflightgames.com/en/products/star-wars-the-deckbuilding-game/" target="_blank"
+                rel="noopener">Star Wars: The Deckbuilding Game ↗</a></p>
+    </header>
 
-<main>
+    <main>
 
-  <section class="products-section">
-    <h2>Select your products</h2>
-    <div class="product-list">
+        <section class="products-section">
+            <h2>Select your products</h2>
+            <div class="product-list">
 
-      <label class="product-label">
-        <input type="checkbox" id="cb-base" checked />
-        <div class="product-info">
-          <strong>Star Wars: The Deckbuilding Game</strong>
-          <span>Galactic Empire &bull; Rebel Alliance &bull; Base Game galaxy deck</span>
+                <label class="product-label">
+                    <input type="checkbox" id="cb-base" checked />
+                    <div class="product-info">
+                        <strong>Star Wars: The Deckbuilding Game</strong>
+                        <span>Galactic Empire &bull; Rebel Alliance &bull; Base Game galaxy deck</span>
+                    </div>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/2d/41/2d41282a-2f80-41da-9555-61ee9ec4e61a/swg01_rulebook_v2-compressed.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+
+                <label class="product-label">
+                    <input type="checkbox" id="cb-clone-wars" checked />
+                    <div class="product-info">
+                        <strong>Star Wars: The Deckbuilding Game - Clone Wars Edition</strong>
+                        <span>Galactic Republic &bull; Separatist Confederacy &bull; Clone Wars galaxy deck</span>
+                    </div>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/d7/ff/d7ffdde8-9629-490f-922c-110f24ba722f/swg02_rulebook.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+
+                <label class="product-label">
+                    <input type="checkbox" id="cb-mandalorian" checked />
+                    <div class="product-info">
+                        <strong>Mandalorian Faction Pack</strong>
+                        <span>Mandalorian &bull; 3-player galaxy deck</span>
+                    </div>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/97/ae/97ae9625-5419-47bd-95b8-f04e7061a1c0/swg03_rulebook_v6.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+
+            </div>
+        </section>
+
+        <section class="game-mode-section" id="game-mode-section">
+            <h2>Game Mode</h2>
+            <div class="game-mode-options">
+                <label class="mode-label" id="mode-label-1v1">
+                    <input type="radio" name="game-mode" value="1v1" checked />
+                    <span>1v1</span>
+                </label>
+                <label class="mode-label" id="mode-label-2v2">
+                    <input type="radio" name="game-mode" value="2v2" />
+                    <span>2v2</span>
+                    <a class="rulebook-link" style="margin-left: 0.5rem; font-size: 0.7rem;"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/2a/00/2a00b9ac-8506-4e0d-bd2c-0b13ce0b35de/swg02_multiplayer_v1-1_compressed.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+                <label class="mode-label" id="mode-label-3p">
+                    <input type="radio" name="game-mode" value="3p" />
+                    <span>3-Player Free-for-All</span>
+                </label>
+            </div>
+        </section>
+
+        <div class="error-msg" id="error-msg">
+            At least one standalone product (Base Game or Clone Wars Edition) must be selected. The Mandalorian Faction
+            Pack is an expansion and cannot be used alone.
         </div>
-        <a class="rulebook-link" href="https://images-cdn.fantasyflightgames.com/filer_public/2d/41/2d41282a-2f80-41da-9555-61ee9ec4e61a/swg01_rulebook_v2-compressed.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
-      </label>
 
-      <label class="product-label">
-        <input type="checkbox" id="cb-clone-wars" checked />
-        <div class="product-info">
-          <strong>Star Wars: The Deckbuilding Game - Clone Wars Edition</strong>
-          <span>Galactic Republic &bull; Separatist Confederacy &bull; Clone Wars galaxy deck</span>
-        </div>
-        <a class="rulebook-link" href="https://images-cdn.fantasyflightgames.com/filer_public/d7/ff/d7ffdde8-9629-490f-922c-110f24ba722f/swg02_rulebook.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
-      </label>
+        <button class="randomize-btn" id="randomize-btn">Randomize</button>
 
-      <label class="product-label">
-        <input type="checkbox" id="cb-mandalorian" checked />
-        <div class="product-info">
-          <strong>Mandalorian Faction Pack</strong>
-          <span>Mandalorian &bull; 3-player galaxy deck</span>
-        </div>
-        <a class="rulebook-link" href="https://images-cdn.fantasyflightgames.com/filer_public/97/ae/97ae9625-5419-47bd-95b8-f04e7061a1c0/swg03_rulebook_v6.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
-      </label>
+        <section class="results-section" id="results-section">
+            <h2>Results</h2>
 
-    </div>
-  </section>
+            <!-- Standard layout: 1v1 and 3p -->
+            <div id="standard-layout">
+                <div class="player-cards">
+                    <div class="player-card" id="card-p1">
+                        <div class="player-label">Player 1</div>
+                        <div class="faction-name" id="p1-faction"></div>
+                    </div>
+                    <div class="player-card" id="card-p2">
+                        <div class="player-label">Player 2</div>
+                        <div class="faction-name" id="p2-faction"></div>
+                    </div>
+                    <div class="player-card" id="card-p3">
+                        <div class="player-label">Player 3</div>
+                        <div class="faction-name" id="p3-faction"></div>
+                    </div>
+                </div>
 
-  <section class="game-mode-section" id="game-mode-section">
-    <h2>Game Mode</h2>
-    <div class="game-mode-options">
-      <label class="mode-label" id="mode-label-1v1">
-        <input type="radio" name="game-mode" value="1v1" checked />
-        <span>1v1</span>
-      </label>
-      <label class="mode-label" id="mode-label-2v2">
-        <input type="radio" name="game-mode" value="2v2" />
-        <span>2v2</span>
-        <a class="rulebook-link" style="margin-left: 0.5rem; font-size: 0.7rem;" href="https://images-cdn.fantasyflightgames.com/filer_public/2a/00/2a00b9ac-8506-4e0d-bd2c-0b13ce0b35de/swg02_multiplayer_v1-1_compressed.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
-      </label>
-      <label class="mode-label" id="mode-label-3p">
-        <input type="radio" name="game-mode" value="3p" />
-        <span>3-Player Free-for-All</span>
-      </label>
-    </div>
-  </section>
+                <div class="galaxy-card" style="margin-top: 1rem;">
+                    <div class="galaxy-label">Galaxy Deck</div>
+                    <div class="galaxy-name" id="galaxy-deck"></div>
+                </div>
+            </div>
 
-  <div class="error-msg" id="error-msg">
-    At least one standalone product (Base Game or Clone Wars Edition) must be selected. The Mandalorian Faction Pack is an expansion and cannot be used alone.
-  </div>
+            <!-- 2v2 layout -->
+            <div id="two-v-two-layout" style="display:none;">
+                <div class="two-v-two-region">
+                    <div class="region-header-label">Region 1</div>
+                    <div class="player-card" id="card-2v2-a1">
+                        <div class="player-label">Team A</div>
+                        <div class="faction-name" id="faction-2v2-a1"></div>
+                    </div>
+                    <div class="vs-separator">vs</div>
+                    <div class="player-card" id="card-2v2-b1">
+                        <div class="player-label">Team B</div>
+                        <div class="faction-name" id="faction-2v2-b1"></div>
+                    </div>
+                    <div class="galaxy-card">
+                        <div class="galaxy-label">Galaxy Deck</div>
+                        <div class="galaxy-name" id="galaxy-deck-r1"></div>
+                    </div>
+                </div>
 
-  <button class="randomize-btn" id="randomize-btn">Randomize</button>
+                <div class="two-v-two-region">
+                    <div class="region-header-label">Region 2</div>
+                    <div class="player-card" id="card-2v2-a2">
+                        <div class="player-label">Team A</div>
+                        <div class="faction-name" id="faction-2v2-a2"></div>
+                    </div>
+                    <div class="vs-separator">vs</div>
+                    <div class="player-card" id="card-2v2-b2">
+                        <div class="player-label">Team B</div>
+                        <div class="faction-name" id="faction-2v2-b2"></div>
+                    </div>
+                    <div class="galaxy-card">
+                        <div class="galaxy-label">Galaxy Deck</div>
+                        <div class="galaxy-name" id="galaxy-deck-r2"></div>
+                    </div>
+                </div>
+            </div>
 
-  <section class="results-section" id="results-section">
-    <h2>Results</h2>
+        </section>
 
-    <!-- Standard layout: 1v1 and 3p -->
-    <div id="standard-layout">
-      <div class="player-cards">
-        <div class="player-card" id="card-p1">
-          <div class="player-label">Player 1</div>
-          <div class="faction-name" id="p1-faction"></div>
-        </div>
-        <div class="player-card" id="card-p2">
-          <div class="player-label">Player 2</div>
-          <div class="faction-name" id="p2-faction"></div>
-        </div>
-        <div class="player-card" id="card-p3">
-          <div class="player-label">Player 3</div>
-          <div class="faction-name" id="p3-faction"></div>
-        </div>
-      </div>
+    </main>
 
-      <div class="galaxy-card" style="margin-top: 1rem;">
-        <div class="galaxy-label">Galaxy Deck</div>
-        <div class="galaxy-name" id="galaxy-deck"></div>
-      </div>
-    </div>
-
-    <!-- 2v2 layout -->
-    <div id="two-v-two-layout" style="display:none;">
-      <div class="two-v-two-region">
-        <div class="region-header-label">Region 1</div>
-        <div class="player-card" id="card-2v2-a1">
-          <div class="player-label">Team A</div>
-          <div class="faction-name" id="faction-2v2-a1"></div>
-        </div>
-        <div class="vs-separator">vs</div>
-        <div class="player-card" id="card-2v2-b1">
-          <div class="player-label">Team B</div>
-          <div class="faction-name" id="faction-2v2-b1"></div>
-        </div>
-        <div class="galaxy-card">
-          <div class="galaxy-label">Galaxy Deck</div>
-          <div class="galaxy-name" id="galaxy-deck-r1"></div>
-        </div>
-      </div>
-
-      <div class="two-v-two-region">
-        <div class="region-header-label">Region 2</div>
-        <div class="player-card" id="card-2v2-a2">
-          <div class="player-label">Team A</div>
-          <div class="faction-name" id="faction-2v2-a2"></div>
-        </div>
-        <div class="vs-separator">vs</div>
-        <div class="player-card" id="card-2v2-b2">
-          <div class="player-label">Team B</div>
-          <div class="faction-name" id="faction-2v2-b2"></div>
-        </div>
-        <div class="galaxy-card">
-          <div class="galaxy-label">Galaxy Deck</div>
-          <div class="galaxy-name" id="galaxy-deck-r2"></div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-</main>
-
-<script src="scripts.js"></script>
+    <script src="scripts.js"></script>
 
 
-<footer>
-  <p>This project is not affiliated with Fantasy Flight Publishing, Inc. or Lucasfilm Ltd. LLC.</p>
-</footer>
+    <footer>
+        <p>This project is not affiliated with Fantasy Flight Publishing, Inc. or Lucasfilm Ltd. LLC.</p>
+    </footer>
 
 </body>
+
 </html>
