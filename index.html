@@ -42,6 +42,17 @@
                         target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
                 </label>
 
+                <label class="product-label product-label-subproduct">
+                    <input type="checkbox" id="cb-reinforcements" />
+                    <div class="product-info">
+                        <strong>Rebel & Empire - Reinforcements Expansion</strong>
+                        <span>Galactic Empire reinforcements &bull; Rebel Alliance reinforcements</span>
+                    </div>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/f4/ff/f4ff9996-1c3f-4f83-aa93-5965e10f1694/swg04_rulebook_eng.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+
                 <label class="product-label">
                     <input type="checkbox" id="cb-clone-wars" checked />
                     <div class="product-info">
@@ -69,21 +80,58 @@
 
         <section class="game-mode-section" id="game-mode-section">
             <h2>Game Mode</h2>
-            <div class="game-mode-options">
+            <div class="game-mode-list">
                 <label class="mode-label" id="mode-label-1v1">
                     <input type="radio" name="game-mode" value="1v1" checked />
-                    <span>1v1</span>
+                    <div class="mode-info">
+                        <strong>1v1</strong>
+                        <span>Two factions &bull; One galaxy deck</span>
+                    </div>
+                </label>
+                <label class="mode-label" id="mode-label-1v1-reinforcements">
+                    <input type="radio" name="game-mode" value="1v1-reinforcements" />
+                    <div class="mode-info">
+                        <strong>1v1 w/ reinforcements</strong>
+                        <span>Galactic Empire + reinforcements &bull; Rebel Alliance + reinforcements &bull; One galaxy deck</span>
+                    </div>
+                </label>
+                <label class="mode-label" id="mode-label-1v1-custom">
+                    <input type="radio" name="game-mode" value="1v1-custom" />
+                    <div class="mode-info">
+                        <strong>1v1 custom</strong>
+                        <span>Custom Galactic Empire &bull; Custom Rebel Alliance &bull; One galaxy deck</span>
+                    </div>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/a1/18/a1182d94-3b2a-4811-b606-a6de9fceae04/custom_game_mode_rules.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
                 </label>
                 <label class="mode-label" id="mode-label-2v2">
                     <input type="radio" name="game-mode" value="2v2" />
-                    <span>2v2</span>
-                    <a class="rulebook-link" style="margin-left: 0.5rem; font-size: 0.7rem;"
+                    <div class="mode-info">
+                        <strong>2v2</strong>
+                        <span>Four factions &bull; Two teams &bull; Two galaxy decks</span>
+                    </div>
+                    <a class="rulebook-link"
                         href="https://images-cdn.fantasyflightgames.com/filer_public/2a/00/2a00b9ac-8506-4e0d-bd2c-0b13ce0b35de/swg02_multiplayer_v1-1_compressed.pdf"
+                        target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+                <label class="mode-label" id="mode-label-2v2-reinforcements">
+                    <input type="radio" name="game-mode" value="2v2-reinforcements" />
+                    <div class="mode-info">
+                        <strong>2v2 w/ reinforcements</strong>
+                        <span>Galactic Empire + reinforcements &bull; Rebel Alliance + reinforcements &bull; Two base game galaxy decks</span>
+                    </div>
+                    <span class="warning-icon" data-tooltip="2 copies of the base game and the reinforcements expansion are necessary to play this game">⚠</span>
+                    <a class="rulebook-link"
+                        href="https://images-cdn.fantasyflightgames.com/filer_public/df/6e/df6ee165-cae8-4d2a-94c9-f1a07f4bd5ad/multiplayer_with_missions_rules.pdf"
                         target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
                 </label>
                 <label class="mode-label" id="mode-label-3p">
                     <input type="radio" name="game-mode" value="3p" />
-                    <span>3-Player Free-for-All</span>
+                    <div class="mode-info">
+                        <strong>3-Player Free-for-All</strong>
+                        <span>Three factions &bull; One galaxy deck &bull; 3-player galaxy deck add-on</span>
+                    </div>
                 </label>
             </div>
         </section>

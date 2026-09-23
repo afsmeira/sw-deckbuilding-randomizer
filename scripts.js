@@ -26,12 +26,53 @@ const PRODUCTS = {
     galaxyDeck: null,
     galaxyDeck3p: 'Mandalorian 3-player galaxy deck',
   },
+  reinforcements: {
+    label: 'Rebel & Empire - Reinforcements Expansion',
+    standalone: false,
+    parentProduct: 'base',
+    factions: [],
+    galaxyDeck: null,
+  },
+};
+
+const GAME_MODES = {
+  '1v1': {
+    label: '1v1',
+    requiresProducts: [],
+    allowedFactions: null,
+  },
+  '2v2': {
+    label: '2v2',
+    requiresProducts: ['base', 'cloneWars'],
+    allowedFactions: null,
+  },
+  '2v2-reinforcements': {
+    label: '2v2 w/ reinforcements',
+    requiresProducts: ['base', 'reinforcements'],
+    allowedFactions: ['Galactic Empire', 'Rebel Alliance'],
+  },
+  '3p': {
+    label: '3-Player Free-for-All',
+    requiresProducts: ['mandalorian'],
+    allowedFactions: null,
+  },
+  '1v1-reinforcements': {
+    label: '1v1 w/ reinforcements',
+    requiresProducts: ['base', 'reinforcements'],
+    allowedFactions: ['Galactic Empire', 'Rebel Alliance'],
+  },
+  '1v1-custom': {
+    label: '1v1 custom',
+    requiresProducts: ['base', 'reinforcements'],
+    allowedFactions: ['Galactic Empire', 'Rebel Alliance'],
+  },
 };
 
 const checkboxes = {
-  base:        document.getElementById('cb-base'),
-  cloneWars:   document.getElementById('cb-clone-wars'),
-  mandalorian: document.getElementById('cb-mandalorian'),
+  base:           document.getElementById('cb-base'),
+  cloneWars:      document.getElementById('cb-clone-wars'),
+  mandalorian:    document.getElementById('cb-mandalorian'),
+  reinforcements: document.getElementById('cb-reinforcements'),
 };
 
 const errorMsg          = document.getElementById('error-msg');
@@ -41,9 +82,12 @@ const twoVTwoLayout     = document.getElementById('two-v-two-layout');
 const playerCardsEl     = document.querySelector('.player-cards');
 const cardP3            = document.getElementById('card-p3');
 
-const modeLabel1v1      = document.getElementById('mode-label-1v1');
-const modeLabel2v2      = document.getElementById('mode-label-2v2');
-const modeLabel3p       = document.getElementById('mode-label-3p');
+const modeLabel1v1              = document.getElementById('mode-label-1v1');
+const modeLabel2v2              = document.getElementById('mode-label-2v2');
+const modeLabel2v2Reinforcements = document.getElementById('mode-label-2v2-reinforcements');
+const modeLabel3p               = document.getElementById('mode-label-3p');
+const modeLabel1v1Reinforcements = document.getElementById('mode-label-1v1-reinforcements');
+const modeLabel1v1Custom        = document.getElementById('mode-label-1v1-custom');
 
 function getChecked() {
   return Object.fromEntries(
@@ -51,29 +95,42 @@ function getChecked() {
   );
 }
 
+function canEnableMode(modeKey, checked) {
+  const mode = GAME_MODES[modeKey];
+  if (!mode) return false;
+
+  if (mode.requiresProducts.length === 0) return true;
+  return mode.requiresProducts.every(p => checked[p]);
+}
+
 function updateGameModeOptions() {
   const checked = getChecked();
-  const can3p  = checked.mandalorian;
-  const can2v2 = checked.base && checked.cloneWars;
+  const modeLabels = {
+    '1v1': modeLabel1v1,
+    '2v2': modeLabel2v2,
+    '2v2-reinforcements': modeLabel2v2Reinforcements,
+    '3p': modeLabel3p,
+    '1v1-reinforcements': modeLabel1v1Reinforcements,
+    '1v1-custom': modeLabel1v1Custom,
+  };
 
-  // Enable/disable 3p
-  if (can3p) {
-    modeLabel3p.classList.remove('disabled');
-  } else {
-    modeLabel3p.classList.add('disabled');
-    if (document.querySelector('input[name="game-mode"]:checked').value === '3p') {
-      document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
-    }
-  }
+  const currentSelectedMode = document.querySelector('input[name="game-mode"]:checked').value;
+  let shouldResetMode = false;
 
-  // Enable/disable 2v2
-  if (can2v2) {
-    modeLabel2v2.classList.remove('disabled');
-  } else {
-    modeLabel2v2.classList.add('disabled');
-    if (document.querySelector('input[name="game-mode"]:checked').value === '2v2') {
-      document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
+  Object.entries(modeLabels).forEach(([modeKey, label]) => {
+    const canEnable = canEnableMode(modeKey, checked);
+    if (canEnable) {
+      label.classList.remove('disabled');
+    } else {
+      label.classList.add('disabled');
+      if (currentSelectedMode === modeKey) {
+        shouldResetMode = true;
+      }
     }
+  });
+
+  if (shouldResetMode) {
+    document.querySelector('input[name="game-mode"][value="1v1"]').checked = true;
   }
 }
 
@@ -110,31 +167,59 @@ function randomize() {
   errorMsg.classList.remove('visible');
 
   const mode = document.querySelector('input[name="game-mode"]:checked').value;
+  const gameMode = GAME_MODES[mode];
 
   // Build faction pool from checked products
-  const factionPool = Object.entries(PRODUCTS)
+  let factionPool = Object.entries(PRODUCTS)
     .filter(([key]) => checked[key])
     .flatMap(([, p]) => p.factions);
 
+  // Filter factions if game mode restricts them
+  if (gameMode.allowedFactions) {
+    factionPool = factionPool.filter(f => gameMode.allowedFactions.includes(f.name));
+  }
+
   const shuffledFactions = shuffle(factionPool);
 
-  if (mode === '2v2') {
-    // Pick 4 factions
-    const [a1, a2, b1, b2] = shuffledFactions;
+  if (mode === '2v2' || mode === '2v2-reinforcements') {
+    const isReinforcements = mode === '2v2-reinforcements';
 
-    // Assign galaxy decks: shuffle [base, cloneWars] and assign one per region
-    const galaxyDecks = shuffle([
-      PRODUCTS.base.galaxyDeck,
-      PRODUCTS.cloneWars.galaxyDeck,
-    ]);
+    if (isReinforcements) {
+      // For 2v2 w/ reinforcements: only randomize team assignments, use same for both regions
+      const empireObj = { name: 'Galactic Empire', cssClass: 'faction-empire' };
+      const rebelObj = { name: 'Rebel Alliance', cssClass: 'faction-rebel' };
 
-    setCard(document.getElementById('card-2v2-a1'), document.getElementById('faction-2v2-a1'), a1);
-    setCard(document.getElementById('card-2v2-a2'), document.getElementById('faction-2v2-a2'), a2);
-    setCard(document.getElementById('card-2v2-b1'), document.getElementById('faction-2v2-b1'), b1);
-    setCard(document.getElementById('card-2v2-b2'), document.getElementById('faction-2v2-b2'), b2);
+      // Randomly assign which team gets Empire vs Rebel
+      const assignmentA = Math.random() < 0.5 ? empireObj : rebelObj;
+      const assignmentB = assignmentA.name === 'Galactic Empire' ? rebelObj : empireObj;
 
-    document.getElementById('galaxy-deck-r1').textContent = galaxyDecks[0];
-    document.getElementById('galaxy-deck-r2').textContent = galaxyDecks[1];
+      setCard(document.getElementById('card-2v2-a1'), document.getElementById('faction-2v2-a1'), assignmentA);
+      setCard(document.getElementById('card-2v2-a2'), document.getElementById('faction-2v2-a2'), assignmentA);
+      setCard(document.getElementById('card-2v2-b1'), document.getElementById('faction-2v2-b1'), assignmentB);
+      setCard(document.getElementById('card-2v2-b2'), document.getElementById('faction-2v2-b2'), assignmentB);
+
+      // Use base game galaxy deck for both regions
+      const galaxyDeck = PRODUCTS.base.galaxyDeck;
+      document.getElementById('galaxy-deck-r1').textContent = galaxyDeck;
+      document.getElementById('galaxy-deck-r2').textContent = galaxyDeck;
+    } else {
+      // Standard 2v2: Pick 4 factions and randomize galaxy decks
+      const [a1, a2, b1, b2] = shuffledFactions;
+
+      // Assign galaxy decks: shuffle [base, cloneWars] and assign one per region
+      const galaxyDecks = shuffle([
+        PRODUCTS.base.galaxyDeck,
+        PRODUCTS.cloneWars.galaxyDeck,
+      ]);
+
+      setCard(document.getElementById('card-2v2-a1'), document.getElementById('faction-2v2-a1'), a1);
+      setCard(document.getElementById('card-2v2-a2'), document.getElementById('faction-2v2-a2'), a2);
+      setCard(document.getElementById('card-2v2-b1'), document.getElementById('faction-2v2-b1'), b1);
+      setCard(document.getElementById('card-2v2-b2'), document.getElementById('faction-2v2-b2'), b2);
+
+      document.getElementById('galaxy-deck-r1').textContent = galaxyDecks[0];
+      document.getElementById('galaxy-deck-r2').textContent = galaxyDecks[1];
+    }
 
     standardLayout.style.display = 'none';
     twoVTwoLayout.style.display  = 'grid';
@@ -145,7 +230,7 @@ function randomize() {
 
     // Pick one galaxy deck from checked standalone products
     const galaxyPool = Object.entries(PRODUCTS)
-      .filter(([key, p]) => checked[key] && p.galaxyDeck)
+      .filter(([key, p]) => checked[key] && p.galaxyDeck && key !== 'reinforcements')
       .map(([, p]) => p.galaxyDeck);
 
     let galaxyText = galaxyPool[Math.floor(Math.random() * galaxyPool.length)];
