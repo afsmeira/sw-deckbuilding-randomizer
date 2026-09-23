@@ -27,7 +27,13 @@
 
     <main>
 
-        <section class="products-section">
+        <div class="tabs-navigation">
+            <button class="tab-button tab-active" data-tab="randomizer">Faction Randomizer</button>
+            <button class="tab-button" data-tab="campaign-log">Campaign Log</button>
+        </div>
+
+        <div id="randomizer-tab" class="tab-content tab-active">
+            <section class="products-section">
             <h2>Select your products</h2>
             <div class="product-list">
 
@@ -104,6 +110,13 @@
                     <a class="rulebook-link"
                         href="https://images-cdn.fantasyflightgames.com/filer_public/a1/18/a1182d94-3b2a-4811-b606-a6de9fceae04/custom_game_mode_rules.pdf"
                         target="_blank" rel="noopener" onclick="event.stopPropagation()">Rulebook ↗</a>
+                </label>
+                <label class="mode-label" id="mode-label-1v1-campaign">
+                    <input type="radio" name="game-mode" value="1v1-campaign" />
+                    <div class="mode-info">
+                        <strong>1v1 campaign</strong>
+                        <span>Galactic Empire &bull; Rebel Alliance &bull; Campaign log tracking</span>
+                    </div>
                 </label>
                 <label class="mode-label" id="mode-label-2v2">
                     <input type="radio" name="game-mode" value="2v2" />
@@ -207,6 +220,201 @@
             </div>
 
         </section>
+        </div>
+
+        <div id="campaign-log-tab" class="tab-content">
+            <section class="campaign-log-section" id="campaign-log-section">
+                <h2>Campaign Log</h2>
+                <p class="campaign-storage-note">
+                    Your campaigns are saved locally in your browser's storage. Clearing your browser's cache, cookies, or site data will permanently delete these campaigns.
+                </p>
+
+                <!-- Campaign list view -->
+                <div id="campaign-list-view" class="campaign-list-view">
+                    <div class="campaign-list-container">
+                        <ul id="campaign-list" class="campaign-list">
+                        </ul>
+                    </div>
+                    <button class="btn-primary" id="create-new-campaign-btn" style="margin-top: 1rem;">Create New Campaign</button>
+                </div>
+
+                <!-- Campaign detail view -->
+                <div id="campaign-detail-view" class="campaign-detail-view" style="display: none;">
+                    <div class="campaign-detail-header">
+                        <button class="btn-back" id="back-to-list-btn">← Back</button>
+                        <h3 id="campaign-detail-title"></h3>
+                    </div>
+
+                    <div class="campaign-form-section faction-section" data-faction="rebels">
+                        <button class="faction-header" onclick="toggleFactionSection('rebels')">
+                            <h4>Rebel Alliance</h4>
+                            <span class="collapse-icon">▼</span>
+                        </button>
+                        <div class="faction-content" id="rebels-content">
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from base deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list" data-faction="rebels" data-subsection="removed-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('rebels', 'removed-cards')">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from starter deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="rebels" data-subsection="removed-starter-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('rebels', 'removed-starter-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards added to starter deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="rebels" data-subsection="added-starter-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('rebels', 'added-starter-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from galaxy deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="rebels" data-subsection="removed-galaxy-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('rebels', 'removed-galaxy-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards added to galaxy deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="rebels" data-subsection="added-galaxy-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('rebels', 'added-galaxy-cards', true)">+ Add Card</button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="campaign-form-section faction-section" data-faction="empire">
+                        <button class="faction-header" onclick="toggleFactionSection('empire')">
+                            <h4>Galactic Empire</h4>
+                            <span class="collapse-icon">▼</span>
+                        </button>
+                        <div class="faction-content" id="empire-content">
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from base deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list" data-faction="empire" data-subsection="removed-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('empire', 'removed-cards')">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from starter deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="empire" data-subsection="removed-starter-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('empire', 'removed-starter-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards added to starter deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="empire" data-subsection="added-starter-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('empire', 'added-starter-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards removed from galaxy deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="empire" data-subsection="removed-galaxy-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('empire', 'removed-galaxy-cards', true)">+ Add Card</button>
+                        </div>
+
+                        <div class="campaign-subsection">
+                            <h5>Cards added to galaxy deck</h5>
+                            <div class="campaign-card-list-container">
+                                <ul class="campaign-card-list campaign-card-list-with-quantity" data-faction="empire" data-subsection="added-galaxy-cards"></ul>
+                            </div>
+                            <button class="btn-secondary" onclick="addCardToList('empire', 'added-galaxy-cards', true)">+ Add Card</button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="campaign-form-section">
+                        <h4>Force Track</h4>
+                        <table class="force-track-table">
+                            <thead>
+                                <tr>
+                                    <th class="game-column"></th>
+                                    <th class="faction-column faction-rebels">Rebel<br>Alliance</th>
+                                    <th class="force-value force-rebels">←3</th>
+                                    <th class="force-value force-rebels">←2</th>
+                                    <th class="force-value force-rebels">←1</th>
+                                    <th class="force-value">Balanced</th>
+                                    <th class="force-value force-empire">1→</th>
+                                    <th class="force-value force-empire">2→</th>
+                                    <th class="force-value force-empire">3→</th>
+                                    <th class="faction-column faction-empire">Galactic<br>Empire</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="game-column">Game 1</td>
+                                        <td class="faction-cell faction-rebels"></td>
+                                        <td><input type="radio" name="force-game-1" value="-3" onchange="updateForceTrack('game1', '-3')"></td>
+                                        <td><input type="radio" name="force-game-1" value="-2" onchange="updateForceTrack('game1', '-2')"></td>
+                                        <td><input type="radio" name="force-game-1" value="-1" onchange="updateForceTrack('game1', '-1')"></td>
+                                        <td><input type="radio" name="force-game-1" value="0" onchange="updateForceTrack('game1', '0')"></td>
+                                        <td><input type="radio" name="force-game-1" value="1" onchange="updateForceTrack('game1', '1')"></td>
+                                        <td><input type="radio" name="force-game-1" value="2" onchange="updateForceTrack('game1', '2')"></td>
+                                        <td><input type="radio" name="force-game-1" value="3" onchange="updateForceTrack('game1', '3')"></td>
+                                        <td class="faction-cell faction-empire"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="game-column">Game 2</td>
+                                        <td class="faction-cell faction-rebels"></td>
+                                        <td><input type="radio" name="force-game-2" value="-3" onchange="updateForceTrack('game2', '-3')"></td>
+                                        <td><input type="radio" name="force-game-2" value="-2" onchange="updateForceTrack('game2', '-2')"></td>
+                                        <td><input type="radio" name="force-game-2" value="-1" onchange="updateForceTrack('game2', '-1')"></td>
+                                        <td><input type="radio" name="force-game-2" value="0" onchange="updateForceTrack('game2', '0')"></td>
+                                        <td><input type="radio" name="force-game-2" value="1" onchange="updateForceTrack('game2', '1')"></td>
+                                        <td><input type="radio" name="force-game-2" value="2" onchange="updateForceTrack('game2', '2')"></td>
+                                        <td><input type="radio" name="force-game-2" value="3" onchange="updateForceTrack('game2', '3')"></td>
+                                        <td class="faction-cell faction-empire"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="game-column">Game 3</td>
+                                        <td class="faction-cell faction-rebels"></td>
+                                        <td><input type="radio" name="force-game-3" value="-3" onchange="updateForceTrack('game3', '-3')"></td>
+                                        <td><input type="radio" name="force-game-3" value="-2" onchange="updateForceTrack('game3', '-2')"></td>
+                                        <td><input type="radio" name="force-game-3" value="-1" onchange="updateForceTrack('game3', '-1')"></td>
+                                        <td><input type="radio" name="force-game-3" value="0" onchange="updateForceTrack('game3', '0')"></td>
+                                        <td><input type="radio" name="force-game-3" value="1" onchange="updateForceTrack('game3', '1')"></td>
+                                        <td><input type="radio" name="force-game-3" value="2" onchange="updateForceTrack('game3', '2')"></td>
+                                        <td><input type="radio" name="force-game-3" value="3" onchange="updateForceTrack('game3', '3')"></td>
+                                        <td class="faction-cell faction-empire"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="game-column">Game 4</td>
+                                        <td class="faction-cell faction-rebels"></td>
+                                        <td><input type="radio" name="force-game-4" value="-3" onchange="updateForceTrack('game4', '-3')"></td>
+                                        <td><input type="radio" name="force-game-4" value="-2" onchange="updateForceTrack('game4', '-2')"></td>
+                                        <td><input type="radio" name="force-game-4" value="-1" onchange="updateForceTrack('game4', '-1')"></td>
+                                        <td><input type="radio" name="force-game-4" value="0" onchange="updateForceTrack('game4', '0')"></td>
+                                        <td><input type="radio" name="force-game-4" value="1" onchange="updateForceTrack('game4', '1')"></td>
+                                        <td><input type="radio" name="force-game-4" value="2" onchange="updateForceTrack('game4', '2')"></td>
+                                        <td><input type="radio" name="force-game-4" value="3" onchange="updateForceTrack('game4', '3')"></td>
+                                        <td class="faction-cell faction-empire"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </section>
+        </div>
 
     </main>
 

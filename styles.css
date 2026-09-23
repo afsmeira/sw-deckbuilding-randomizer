@@ -108,6 +108,47 @@ main {
   gap: 2rem;
 }
 
+/* Tabs */
+.tabs-navigation {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #1e2a40;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: #667799;
+  font-family: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-button:hover {
+  color: #8899bb;
+}
+
+.tab-button.tab-active {
+  color: #f0d060;
+  border-bottom-color: #f0d060;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.tab-active {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /* Products section */
 .products-section h2 {
   font-size: 1.1rem;
@@ -307,6 +348,497 @@ a.rulebook-link:hover {
   opacity: 0.35;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Campaign log section */
+.campaign-log-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.campaign-log-section h2 {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8899bb;
+  margin-bottom: 0;
+}
+
+.campaign-log-section h3 {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #667799;
+  margin-bottom: 0.75rem;
+}
+
+.campaign-storage-note {
+  font-size: 0.85rem;
+  color: #667799;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: rgba(10, 15, 30, 0.6);
+  border-left: 3px solid #5fbfb0;
+  border-radius: 4px;
+}
+
+/* Campaign list view */
+.campaign-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.campaign-list-container {
+  border: 1px solid #1e2a40;
+  border-radius: 6px;
+  background: #0a0f1e;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.campaign-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.campaign-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #1e2a40;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.campaign-list-item:last-child {
+  border-bottom: none;
+}
+
+.campaign-list-item:hover {
+  background: #0f1528;
+}
+
+.campaign-list-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.campaign-list-item-name {
+  font-size: 1rem;
+  color: #dde4f0;
+  letter-spacing: 0.02em;
+}
+
+.campaign-list-item-date {
+  font-size: 0.8rem;
+  color: #667799;
+  letter-spacing: 0.01em;
+}
+
+.campaign-list-item-delete {
+  background: transparent;
+  border: none;
+  color: #e07070;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.campaign-list-item-delete:hover {
+  color: #e8631a;
+}
+
+.campaign-list-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #667799;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+/* Campaign detail view */
+.campaign-detail-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.campaign-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #1e2a40;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #8899bb;
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-back:hover {
+  color: #f0d060;
+}
+
+.campaign-detail-header h3 {
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: #dde4f0;
+  margin: 0;
+}
+
+.campaign-form-section {
+  padding: 1rem;
+  background: #0a0f1e;
+  border: 1px solid #1e2a40;
+  border-radius: 6px;
+}
+
+.campaign-form-section h4 {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #667799;
+  margin: 0 0 1rem 0;
+}
+
+.faction-section {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.faction-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.2s;
+  border-bottom: 2px solid;
+}
+
+.faction-section[data-faction="rebels"] .faction-header {
+  background: rgba(232, 99, 26, 0.1);
+  border-bottom-color: #e8631a;
+}
+
+.faction-section[data-faction="empire"] .faction-header {
+  background: rgba(154, 168, 184, 0.1);
+  border-bottom-color: #9aa8b8;
+}
+
+.faction-header:hover {
+  opacity: 0.8;
+}
+
+.faction-header h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.faction-section[data-faction="rebels"] .faction-header h4 {
+  color: #e8631a;
+}
+
+.faction-section[data-faction="empire"] .faction-header h4 {
+  color: #9aa8b8;
+}
+
+.collapse-icon {
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+.faction-section[data-faction="rebels"] .collapse-icon {
+  color: #e8631a;
+}
+
+.faction-section[data-faction="empire"] .collapse-icon {
+  color: #9aa8b8;
+}
+
+.faction-section.collapsed .collapse-icon {
+  transform: rotate(-90deg);
+}
+
+.faction-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid #151d30;
+  border-top: none;
+}
+
+.faction-section.collapsed .faction-content {
+  display: none;
+}
+
+/* Force Track */
+.force-track-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.force-track-table th,
+.force-track-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #1e2a40;
+}
+
+.force-track-table th {
+  background: #050a18;
+  color: #8899bb;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.force-track-table tbody tr:hover {
+  background: rgba(15, 21, 40, 0.4);
+}
+
+.game-column {
+  text-align: left;
+  color: #dde4f0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-width: 80px;
+}
+
+.faction-column {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 90px;
+}
+
+.faction-column.faction-rebels {
+  color: #e8631a;
+  background: rgba(232, 99, 26, 0.05);
+}
+
+.faction-column.faction-empire {
+  color: #9aa8b8;
+  background: rgba(154, 168, 184, 0.05);
+}
+
+.faction-cell {
+  background: rgba(15, 21, 40, 0.3);
+}
+
+.faction-cell.faction-rebels {
+  background: rgba(232, 99, 26, 0.08);
+}
+
+.faction-cell.faction-empire {
+  background: rgba(154, 168, 184, 0.08);
+}
+
+.force-value {
+  color: #667799;
+}
+
+.force-value.force-rebels {
+  background: rgba(232, 99, 26, 0.08);
+  color: #e8631a;
+}
+
+.force-value.force-empire {
+  background: rgba(154, 168, 184, 0.08);
+  color: #9aa8b8;
+}
+
+.force-track-table input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #5fbfb0;
+}
+
+.campaign-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(15, 21, 40, 0.6);
+  border: 1px solid #151d30;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.campaign-subsection h5 {
+  font-size: 0.9rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8899bb;
+  margin: 0 0 0.5rem 0;
+}
+
+.campaign-card-list-container {
+  border: 1px solid #1e2a40;
+  border-radius: 4px;
+  background: #0a0f1e;
+  max-height: 200px;
+  overflow-y: auto;
+  min-height: 80px;
+}
+
+.campaign-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.campaign-card-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #1e2a40;
+  transition: background 0.2s;
+}
+
+.campaign-card-list-item:last-child {
+  border-bottom: none;
+}
+
+.campaign-card-list-item:hover {
+  background: #0f1528;
+}
+
+.campaign-card-list-item-name {
+  font-size: 0.95rem;
+  color: #dde4f0;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.campaign-card-list-item-delete {
+  background: transparent;
+  border: none;
+  color: #e07070;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s;
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+
+.campaign-card-list-item-delete:hover {
+  color: #e8631a;
+}
+
+.campaign-card-list-empty {
+  text-align: center;
+  padding: 1rem;
+  color: #667799;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.campaign-card-list-with-quantity .campaign-card-list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.campaign-card-list-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.campaign-card-list-item-quantity-label {
+  font-size: 0.85rem;
+  color: #667799;
+}
+
+.campaign-card-list-item-quantity-input {
+  width: 50px;
+  padding: 0.4rem 0.5rem;
+  background: #050a18;
+  border: 1px solid #1e2a40;
+  border-radius: 3px;
+  color: #dde4f0;
+  font-size: 0.9rem;
+  text-align: center;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.campaign-card-list-item-quantity-input:focus {
+  outline: none;
+  border-color: #667799;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.6rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+  border: 1px solid;
+}
+
+.btn-primary {
+  background: #f0d060;
+  color: #05060f;
+  border-color: #f0d060;
+}
+
+.btn-primary:hover {
+  background: #ffdf80;
+  border-color: #ffdf80;
+}
+
+.btn-secondary {
+  background: #f0d060;
+  color: #05060f;
+  border-color: #f0d060;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #ffdf80;
+  border-color: #ffdf80;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .mode-label .warning-icon {
